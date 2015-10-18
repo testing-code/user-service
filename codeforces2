@@ -1,0 +1,85 @@
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <queue>
+#include <deque>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <iostream>
+#include <string.h>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <fstream>
+#define inf (long long)1e15
+#define MAX_N  20
+
+using namespace std;
+int loc(vector<int> &a, int element)
+{
+    int index = 0;
+    for(int i = 0; i < a.size(); i++)
+    {
+        if(a[i] >= element){index = i; break;}
+    }
+    return index;
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    if(n == 2)
+    {
+        int a, b;
+        cin >> a >> b;
+        int rez = 0;
+        while(a <= b)
+        {
+            rez++;
+            a++;
+            b--;
+        }
+        cout << rez << endl;
+    }else
+    {
+        int val;
+        vector<int> a(n-1);
+        cin >> val;
+        for(int i = 0; i < n - 1; i++)cin >> a[i];
+        sort(a.begin(), a.end());
+        int result = 0;
+        while(1)
+        {
+             int index = loc(a, val);
+             int value = a.size() - index;
+             for(int i = index; i < a.size(); i++)
+             {
+                 a[i]--;
+             }
+             int maxx = a[a.size() - 1];
+             while(value > 0 && val < maxx)
+             {
+                value--;
+                result++;
+                val++;
+             }
+             if(val > a[a.size() - 1])
+             {
+                 cout << result << endl;
+                 break;
+             }
+        }
+    }
+}
